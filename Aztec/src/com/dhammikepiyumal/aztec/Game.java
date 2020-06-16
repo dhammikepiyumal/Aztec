@@ -46,10 +46,22 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void run() {
+		long LastTime = System.nanoTime();
+		final double ns = 1000000000.0 / 60.0;
+		double delta = 0;
+
 		while (running) {
-			update();
+			long now = System.nanoTime();
+			delta += (now - LastTime) / ns;
+			LastTime = now;
+
+			while (delta >= 1) {
+				update();
+				delta--;
+			}
 			render();
 		}
+		stop();
 	}
 
 	public void update() {
@@ -156,6 +168,15 @@ public class Game extends Canvas implements Runnable {
 /*
  * 'e.printStackTrace()' is used to print the error message if a certain error
  * has encountered
+ */
+/*
+ * 'long LastTime = System.nanoTime()' is a very precise technique to recieve
+ * the computer's current time in nano seconds to be stored in a variable of the
+ * type 'long'
+ */
+/*
+ * 'final' means the value of that particular variable is not going to be
+ * changed
  */
 /*
  * 'update()' handles the logic and basically it updates the game. This is

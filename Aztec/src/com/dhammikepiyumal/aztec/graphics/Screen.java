@@ -2,7 +2,7 @@ package com.dhammikepiyumal.aztec.graphics;
 
 public class Screen {
     private int width, height;
-    private int time = 0;
+    private int xtime = 50, ytime = 50;
     private int counter = 0;
     public int[] pixels;
 
@@ -22,12 +22,24 @@ public class Screen {
         counter++;
 
         if (counter % 100 == 0) {
-            time++;
+            ytime--;
+        }
+
+        if (counter % 100 == 0) {
+            xtime--;
         }
 
         for (int y = 0; y < height; y++) {
+            if (ytime < 0 || ytime >= height) {
+                break;
+            }
+
             for (int x = 0; x < width; x++) {
-                pixels[time + time * width] = 0xff00ff;
+                if (xtime < 0 || xtime >= height) {
+                    break;
+                }
+
+                pixels[xtime + ytime * width] = 0xff00ff;
             }
         }
     }
