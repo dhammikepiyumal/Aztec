@@ -14,6 +14,7 @@ public class Game extends Canvas implements Runnable {
 	public static int width = 300;
 	public static int height = width / 16 * 9;
 	public static int scale = 3;
+	public static String title = "Aztec";
 
 	private static final long serialVersionUID = 1L;
 	private Thread thread;
@@ -47,8 +48,11 @@ public class Game extends Canvas implements Runnable {
 
 	public void run() {
 		long LastTime = System.nanoTime();
+		long timer = System.currentTimeMillis();
 		final double ns = 1000000000.0 / 60.0;
 		double delta = 0;
+		int frames = 0;
+		int updates = 0;
 
 		while (running) {
 			long now = System.nanoTime();
@@ -57,9 +61,19 @@ public class Game extends Canvas implements Runnable {
 
 			while (delta >= 1) {
 				update();
+				updates++;
 				delta--;
 			}
 			render();
+			frames++;
+
+			if (System.currentTimeMillis() - timer > 1000) {
+				timer += 1000;
+				System.out.println("ups : " + updates + ", fps : " + frames);
+				frame.setTitle(title + " | " + "ups : " + updates + ", fps : " + frames);
+				frames = 0;
+				updates = 0;
+			}
 		}
 		stop();
 	}
@@ -94,7 +108,7 @@ public class Game extends Canvas implements Runnable {
 	public static void main(String[] args) {
 		Game game = new Game();
 		game.frame.setResizable(false);
-		game.frame.setTitle("Aztec");
+		game.frame.setTitle(Game.title);
 		game.frame.add(game);
 		game.frame.pack();
 		game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -117,6 +131,9 @@ public class Game extends Canvas implements Runnable {
  */
 /*
  * 'scale' is the factor that the window is to be stretched
+ */
+/*
+ * 'title' is what displays in the title bar of the window
  */
 /*
  * 'private static final long serialVersionUID = 1L' is added as the 'Game'
@@ -172,11 +189,22 @@ public class Game extends Canvas implements Runnable {
 /*
  * 'long LastTime = System.nanoTime()' is a very precise technique to recieve
  * the computer's current time in nano seconds to be stored in a variable of the
- * type 'long'
+ * type 'long'. Similarly, 'long timer = System.currentTimeMillis()' is also an
+ * instance where the current time is stored in miliseconds at 'timer' variable.
  */
 /*
  * 'final' means the value of that particular variable is not going to be
  * changed
+ */
+/*
+ * 'frames' is a variable that has been defined to keep track of the number of
+ * times than an image can be rendered in a second. Basically to get an
+ * understading of how fast the game can be run.
+ */
+/*
+ * 'updates' is going to measure the number of times that 'update' method is
+ * called in every second. In here, the value of this 'updates' variable should
+ * always be 60.
  */
 /*
  * 'update()' handles the logic and basically it updates the game. This is
@@ -185,6 +213,12 @@ public class Game extends Canvas implements Runnable {
 /*
  * 'render()' is displaying images in the screen. This is not going to be
  * restricted.
+ */
+/*
+ * 'frame.setTitle(title + " | " + "Updates : " + updates + ", Frames : " +
+ * frames)' is to update the title of the window to show the actul frames per
+ * second and the number of screen updates we are doing per second. It can be
+ * differ from computer to computer.
  */
 /*
  * 'BufferStratergy' comes from the 'Canvas' and it is basically used as a
