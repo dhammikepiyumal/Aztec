@@ -9,7 +9,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 import com.dhammikepiyumal.aztec.graphics.Screen;
-import com.dhammikepiyumal.aztec.input.Keyboard;
 
 public class Game extends Canvas implements Runnable {
 	public static int width = 300;
@@ -20,7 +19,6 @@ public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 	private Thread thread;
 	private JFrame frame;
-	private Keyboard key;
 	private boolean running = false;
 	private Screen screen;
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -31,9 +29,6 @@ public class Game extends Canvas implements Runnable {
 		setPreferredSize(size);
 		screen = new Screen(width, height);
 		frame = new JFrame();
-		key = new Keyboard();
-
-		addKeyListener(key);
 	}
 
 	public synchronized void start() {
@@ -86,19 +81,8 @@ public class Game extends Canvas implements Runnable {
 	int x = 0, y = 0;
 
 	public void update() {
-		key.update();
-		if (key.up) {
-			y--;
-		}
-		if (key.down) {
-			y++;
-		}
-		if (key.left) {
-			x--;
-		}
-		if (key.right) {
-			x++;
-		}
+		x++;
+		y++;
 	}
 
 	public void render() {
@@ -168,13 +152,6 @@ public class Game extends Canvas implements Runnable {
  * 'JFrame' is basically a type of Window. There are other types of Windows
  */
 /*
- * 'Keyboard' object 'key' is created to interact with the keyboard inputs
- */
-/*
- * 'addKeyListener(key)' is required component in order to listen to the
- * keystrokes
- */
-/*
  * 'BufferedImage' is an image with an accessible buffer. Width, height and the
  * color type has been provided when creating the object.
  */
@@ -213,11 +190,10 @@ public class Game extends Canvas implements Runnable {
  * has encountered
  */
 /*
- * 'long LastTime = System.nanoTime()' is a very precise technique to receive
- * the computer's current time in nanoseconds to be stored in a variable of the
+ * 'long LastTime = System.nanoTime()' is a very precise technique to recieve
+ * the computer's current time in nano seconds to be stored in a variable of the
  * type 'long'. Similarly, 'long timer = System.currentTimeMillis()' is also an
- * instance where the current time is stored in milliseconds at 'timer'
- * variable.
+ * instance where the current time is stored in miliseconds at 'timer' variable.
  */
 /*
  * 'final' means the value of that particular variable is not going to be
@@ -226,7 +202,7 @@ public class Game extends Canvas implements Runnable {
 /*
  * 'frames' is a variable that has been defined to keep track of the number of
  * times than an image can be rendered in a second. Basically to get an
- * understanding of how fast the game can be run.
+ * understading of how fast the game can be run.
  */
 /*
  * 'updates' is going to measure the number of times that 'update' method is
@@ -243,7 +219,7 @@ public class Game extends Canvas implements Runnable {
  */
 /*
  * 'frame.setTitle(title + " | " + "Updates : " + updates + ", Frames : " +
- * frames)' is to update the title of the window to show the actual frames per
+ * frames)' is to update the title of the window to show the actul frames per
  * second and the number of screen updates we are doing per second. It can be
  * differ from computer to computer.
  */
@@ -277,14 +253,14 @@ public class Game extends Canvas implements Runnable {
  * object g to be black
  */
 /*
- * 'g.fillRect(0, 0, getWidth(), getHeight())' will fill a rectangle of given
+ * 'g.fillRect(0, 0, getWidth(), getHeight())' will fill a rectange of given
  * Coordinate size. Here, 'getWidth()' and 'getHeight()' are methods written in
  * 'Canvas' to return the width and the height of the window /* 'g.dispose()'
- * just dispose(remove or clean) all of the Graphics that have been created.
+ * just dispose(remove or clean) all of the Graphics that have been crated.
  */
 /*
  * 'g.drawImage(image, 0, 0, getWidth(), getHeight(), null)' is going to fill
- * the rectangular space provided with coordinate with the image provided.
+ * the rectangular space provided with cooordinate with the image provided.
  * 'null' is provided in the space where the name of the image should be
  * included.
  */
