@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 
 public class SpriteSheet {
     private String path;
-    private final int SIZE;
+    public final int SIZE;
     public int pixels[];
 
     public SpriteSheet(String path, int size) {
@@ -28,3 +28,14 @@ public class SpriteSheet {
 
     }
 }
+
+/*
+ * 'final' means that it can only be declared once. It can be when creating or
+ * in somewhere else. But it can only be declared once. So, basically it is not
+ * a variable. It is a constant
+ */
+/*
+ * 'BufferedImage image = ImageIO.read(SpriteSheet.class.getResource(path))' is
+ * to load the image from the provided location to the 'image' variable of type
+ * 'BufferedImage'.
+ */
