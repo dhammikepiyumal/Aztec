@@ -29,17 +29,16 @@ public class Screen {
 
     public void render(int xOffset, int yOffset) {
         for (int y = 0; y < height; y++) {
-            int yy = y + yOffset;
-            // if (yy < 0 || yy >= height) {
-            // break;
-            // }
+            int yp = y + yOffset;
+            if (yp < 0 || yp >= height) {
+                continue;
+            }
             for (int x = 0; x < width; x++) {
-                int xx = x + xOffset;
-                // if (xx < 0 || xx >= width) {
-                // break;
-                // }
-                int tileIndex = ((xx >> 4) & MAP_SIZE_MASK) + ((yy >> 4) & MAP_SIZE_MASK) * MAP_SIZE;
-                pixels[x + y * width] = tiles[tileIndex];
+                int xp = x + xOffset;
+                if (xp < 0 || xp >= width) {
+                    continue;
+                }
+                pixels[xp + yp * width] = Sprite.grass.pixels[(x & 15) + (y & 15) * Sprite.grass.SIZE];
             }
         }
     }
@@ -58,13 +57,15 @@ public class Screen {
  * this is to increase the speed of the rendering.
  */
 /*
- * 'pixels[x + y * width] = tiles[tileIndex' is the way to fill all of the
- * pixels in the window with the clors of the defined tiles. 'x + y * width' is
- * the way to access the relevent pixel and it is always true for any kind of a
- * rectangular coordinate system dealing with single dimensional arrays.
- * 'FF00FF' is the pink color in Hexadecimal. But in Java, to convert this
- * Hexadecimal into Decimal before we store it as an integer, it should be
- * prefixed wiht '0x'. In order to save a binary value in an integer array, '0b'
- * should be used as a prefix. Note: These Hexadecimal values are not case
- * sensitive. 'ff00ff' and 'FF00FF' are the same.
+ * 'pixels[x + y * width] = Sprite.grass.pixels[(x & 15) + (y & 15) *
+ * Sprite.grass.SIZE]' is the way to fill all of the pixels in the window with
+ * the clors of the defined tiles. 'x + y * width' is the way to access the
+ * relevent pixel and it is always true for any kind of a rectangular coordinate
+ * system dealing with single dimensional arrays. 'FF00FF' is the pink color in
+ * Hexadecimal. But in Java, to convert this Hexadecimal into Decimal before we
+ * store it as an integer, it should be prefixed wiht '0x'. In order to save a
+ * binary value in an integer array, '0b' should be used as a prefix. Note:
+ * These Hexadecimal values are not case sensitive. 'ff00ff' and 'FF00FF' are
+ * the same. x & 15 means basically to loop from the initial value of the x to
+ * 15.
  */
