@@ -187,6 +187,10 @@ public class Game extends Canvas implements Runnable {
  * 'Dimension' is a way of providing coordinates in java
  */
 /*
+ * 'requestFocus()' is focussing the game window automatically. Otherwise it
+ * should be clicked first to perform certain things.
+ */
+/*
  * 'running' is the condition that keeps the Game loop running
  */
 /*
