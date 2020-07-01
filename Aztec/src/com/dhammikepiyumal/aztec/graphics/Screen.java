@@ -2,6 +2,8 @@ package com.dhammikepiyumal.aztec.graphics;
 
 import java.util.Random;
 
+import com.dhammikepiyumal.level.tile.Tile;
+
 public class Screen {
     private int width, height;
     private Random random = new Random();
@@ -40,6 +42,20 @@ public class Screen {
                 }
                 pixels[xp + yp * width] = Sprite.grass.pixels[(x & 15) + (y & 15) * Sprite.grass.SIZE];
             }
+        }
+    }
+
+}
+
+public void renderTile(int xp, int yp,  Tile tile) {
+    for (int y = 0; y < tile.sprite.SIZE; y++) {
+        int ya = y + yp;
+        for (int x = 0; x < tile.sprite.SIZE; x++) {
+            int xa = x + xp;
+            if (x < 0 || x >= width || y < 0 || y >= height) {
+                break; 
+            }
+            pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
         }
     }
 }

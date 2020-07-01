@@ -7,6 +7,8 @@ public class Tile {
 	public int x, y;
 	public Sprite sprite;
 
+	public static Tile grass = new GrassTile(Sprite.grass);
+
 	public Tile(Sprite sprite) {
 		this.sprite = sprite;
 	}
@@ -20,3 +22,9 @@ public class Tile {
 	}
 
 }
+
+/*
+ * 'Tile' objects can be initialized using 'GrassTile' class as 'GrassTile' is a
+ * subclass of Tile. In other words, this is possible as the 'GrassTile' class
+ * extends the 'Tile' class
+ */
