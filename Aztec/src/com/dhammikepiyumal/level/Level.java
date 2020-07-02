@@ -7,7 +7,7 @@ public class Level {
     protected int[] tiles;
 
     public Level(int width, int height) {
-        this.widht = width;
+        this.width = width;
         this.height = height;
         tiles = new int[width * height];
         generateLevel();
