@@ -3,9 +3,9 @@ package com.dhammikepiyumal.level.tile;
 import com.dhammikepiyumal.aztec.graphics.Screen;
 import com.dhammikepiyumal.aztec.graphics.Sprite;
 
-public class GrassTile extends Tile {
+public class VoidTile extends Tile {
 
-    public GrassTile(Sprite sprite) {
+    public VoidTile(Sprite sprite) {
         super(sprite);
     }
 
