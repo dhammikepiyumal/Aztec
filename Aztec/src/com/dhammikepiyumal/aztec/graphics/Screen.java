@@ -59,9 +59,11 @@ public class Screen {
             int ya = y + yp;
             for (int x = 0; x < tile.sprite.SIZE; x++) {
                 int xa = x + xp;
-                if (xp < 0 || xp >= width || yp < 0 || yp >= height) {
+                if (xa < -tile.sprite.SIZE || xa >= width || ya < 0 || ya >= height) {
                     break;
                 }
+                if (xa < 0)
+                    xa = 0;
                 pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
             }
         }
